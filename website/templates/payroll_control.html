@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block tittle %}{{ title }} - {% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/payroll_control.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/forms.css') }}">
+{% endblock css %}
+
+{% block content %}
+{% set doc_type = ["Nomina", "Fondo Ahorro", "Aguinaldo"] %}
+{% set emp_type = ["Sindicalizados", "Confianza"] %}
+<div class="container min-dvh-100 center-container">
+    <div class="payroll-control p-2 font-roboto">
+        <div class="payroll-control-form-container">
+            <form action="" method="post" class="form-container font-roboto" autocomplete="off">
+                <div class="mb-15">
+                    
+                    <div class="form-element-container">
+                        <div class="form-label-container">
+                            <label for="doc_num">Id de doumento:</label>
+                        </div>
+                        <div class="form-input-container">
+                            <input type="text" class="form-input w-100 font-roboto" name="doc_num" id="doc_num" placeholder="Ingrese nombre del documento" {% if doc %}  value="{{ doc.docNum }}" {% else %} autofocus {% endif %} >
+                        </div>
+                    </div>
+                    <div class="form-element-container">
+                        <div class="form-label-container">
+                            <label for="directory">Ubicación:</label>
+                        </div>
+                        <div class="form-input-container">
+                            <input type="text" class="form-input w-100 font-roboto" name="directory" id="directory" placeholder="Ingrese la ubicación del documento" {% if doc %} value="{{ doc.directory }}" autofocus {% endif %} >
+                        </div>
+                    </div>
+                    <div class="form-element-container">
+                        <div class="form-label-container">
+                            <label for="doc_type">Tipo de documento:</label>
+                        </div>
+                        <div class="form-input-container">
+                            <select name="doc_type" id="doc_type" class="form-input w-100 font-roboto" >
+                                {% for i in range(doc_type|length) %}
+                                    <option value="{{ doc_type[i] }}" {% if doc and doc.docType == doc_type[i] %} selected {% endif %}>{{ doc_type[i] }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-element-container">
+                        <div class="form-label-container">
+                            <label for="emp_type">Documento para:</label>
+                        </div>
+                        <div class="form-input-container">
+                            <select name="emp_type" id="emp_type" class="form-input w-100 font-roboto" >
+                                {% for empType in empType_list %}
+                                    <option value="{{ empType.id_empType }}" {% if doc and doc.docType == empType.id_empType %} selected {% endif %}>{{ empType.empType_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-element-container">
+                        <div class="form-label-container">
+                            <label for="start_period">Fecha de inicio periodo:</label>
+                        </div>
+                        <div class="form-input-container" id="doc_date">
+                            <input type="date" class="form-input w-100 font-roboto" name="start_period" id="start_period" {% if doc %} value="{{ doc.startPeriod }}" {% endif %} >
+                        </div>
+                    </div>
+                    <div class="form-element-container">
+                        <div class="form-label-container">
+                            <label for="end_period">Fecha de fin periodo:</label>
+                        </div>
+                        <div class="form-input-container" id="doc_date">
+                            <input type="date" class="form-input w-100 font-roboto" name="end_period" id="end_period" {% if doc %} value="{{ doc.endPeriod }}" {% endif %} >
+                        </div>
+                    </div>
+                    <div class="form-element-container">
+                        <div class="form-label-container">
+                            <label for="doc_num">Empresa:</label>
+                        </div>
+                        <div class="form-input-container">
+                            <div class="w-100 form-radio-options d-flex-center">
+                                <label for="company_ram">
+                                    <div class="form-radio-btn">
+                                        <input type="radio" name="company" id="company_ram" value="RAM" {% if not doc or (doc and doc.company == 'RAM') %} checked {% endif %}>
+                                        <img src="{{ url_for('static', filename='images/logo_Letters.webp') }}" alt="">
+                                        RAM
+                                    </div>
+                                </label>
+                                <label for="company_will">
+                                    <div class="form-radio-btn">
+                                        <img src="{{ url_for('static', filename='images/williams_logo.webp') }}" alt="">
+                                        <input type="radio" name="company" id="company_will" value="WMM" {% if doc and doc.company == 'WMM' %} checked {% endif %}>
+                                        Williams
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-single-button-container w-100">
+                    <button type="submit" class="form-button w-100 font-roboto">
+                        {% if doc %}Editar {% else %}Agregar {% endif %}documento
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M320-240h320v-80H320v80Zm0-160h320v-80H320v80ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"/></svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

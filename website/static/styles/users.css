@@ -1,0 +1,309 @@
+.table-users {
+    max-width: 80rem;
+    margin: auto;
+}
+
+.container-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.no-icons {
+    font-size: .9rem;
+    color: #404040;
+}
+
+.option_icon {
+    fill: #404040;
+}
+
+.option_icon:hover {
+    fill: var(--blue);
+}
+
+.list-item {
+    color: #8B0000;
+}
+
+.checked {
+    font-weight: 600;
+    color: #276221;
+}
+
+.checklist {
+    list-style: none;
+    margin-left: 1rem;
+}
+
+.password-checklist {
+    font-size: .9rem;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    border-radius: .3rem;
+    pointer-events: none;
+    transition: .5s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.password-input-box {
+    width: 100%;
+}
+
+.password-input {
+    margin-bottom: .5rem;
+}
+
+.change-password-header {
+    margin: 2rem 2rem 1rem 2rem;
+}
+
+.change-password-form {
+    margin: 0 2rem;
+}
+
+.search-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.search-container input {
+    font-size: 1.1rem;
+    padding: .6rem 1rem;
+    height: 3.5rem;
+    width: 30rem;
+}
+
+.add-modal-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    height: 3.5rem;
+    background-color: var(--blue);
+    color: #fff;
+    fill: #fff;
+    gap: .5rem;
+    border-radius: .3rem;
+    width: 12rem;
+    border: 2px solid var(--blue);
+}
+
+.add-modal-button:hover {
+    background-color: var(--secondary-bg-color);
+    color: var(--blue);
+    fill: var(--blue);
+}
+
+thead th:hover {
+    cursor: pointer;
+    background-color: #061d69;
+}
+
+thead th svg {
+    fill: var(--blue);
+    border-radius: 50%;
+    background-color: #fff;
+    margin-left: 1rem;
+    margin-top: -0.2rem;
+    position: absolute;
+    display: none;
+}
+
+thead th.active svg {
+    display: inline;
+}
+
+thead th.desc svg {
+    transform: rotate(180deg);
+}
+
+.modal {
+    background-color: var(--bg-color);
+    border-radius: 1rem;
+}
+
+
+
+/*  Created user modal  */
+
+.modal-header-icon {
+    fill: #404040;
+}
+
+.modal-created-user {
+    padding: 3rem 2rem 2rem;
+}
+
+.modal-created-user .modal-icon {
+    position: absolute;
+    top: -5rem;
+    border-radius: 50%;
+    background-color: var(--bg-color);
+}
+
+.modal-created-user .modal-header-icon svg {
+    width: 9rem;
+    height: 9rem;
+    fill: #40c9a2;
+}
+
+#user {
+    border-radius: .3rem;
+    margin-bottom: 1rem;
+}
+
+#password {
+    border-radius: .3rem 0 0 .3rem;
+    border-right: none;
+    padding-right: 2rem;
+}
+
+.password-visibility-icon {
+    position: absolute;
+    top: 0;
+    right: 4rem;
+    width: 3rem;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-visibility-icon:hover {
+    cursor: pointer;
+}
+
+.password-visibility-icon svg {
+    width: 1.8rem;
+    height: 1.8rem;
+    fill: var(--main-font);
+}
+
+#visibility-off {
+    display: none;
+}
+
+.copy-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 4rem;
+    background-color: #ebe9e4;
+    border: 2px solid var(--borders);
+    border-radius: 0 .3rem .3rem 0;
+}
+
+.copy-icon svg {
+    height: 2rem;
+    width: 2rem;
+}
+
+.copy-icon:hover {
+    cursor: pointer;
+    background-color: #d9d9d9;
+}
+
+.copy-icon #copy-span {
+    display: flex;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 0 1rem;
+    height: 2rem;
+    bottom: -2.3rem;
+    opacity: 0;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    border-radius: 3px;
+    font-size: .8rem;
+    transition: opacity .08s linear;
+}
+
+.modal-created-user .modal-created-user-btn {
+    background-color: var(--blue);
+    border: 2px solid var(--blue);
+    border-radius: .3rem;
+    font-weight: 600;
+    padding: 1rem;
+    color: var(--contrast-font);
+}
+
+.modal-created-user .modal-created-user-btn:hover {
+    background-color: var(--bg-color);
+    color: var(--blue);
+}
+
+.modal-input-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+}
+
+.modal-input-with-icon:focus-within .copy-icon {
+    border-color: var(--blue);
+}
+
+
+
+.modal-add-user {
+    position: relative;
+    padding: 7rem 2rem 2rem;
+}
+
+.form-input-container {
+    display: flex;
+    align-items: center;
+}
+
+.created-user-password {
+    display: flex;
+    flex-direction: row;
+}
+
+.modal-btn-add-user {
+    padding: 1rem 0;
+    background-color: var(--blue);
+    border: 2px solid var(--blue);
+    color: #fff;
+    border-radius: .3rem;
+    font-weight: 600;
+}
+
+.modal-btn-add-user:hover {
+    cursor: pointer;
+    background-color: var(--bg-color);
+    color: var(--blue);
+}
+
+.form-radio-btn input[type="radio"] {
+    position: absolute;
+    right: .2rem;
+    top: .5rem;
+}
+
+.form-radio-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    font-size: .8rem;
+}
+
+.form-radio-btn:has(input[type="radio"]:checked) {
+    border-color: #1C1C84;
+    background-color: #F0F8FF;
+}
+
+.form-radio-btn img {
+    height: 2rem;
+}

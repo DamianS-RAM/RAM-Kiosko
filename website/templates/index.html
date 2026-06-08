@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" href="../static/styles/index.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/modals.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/forms.css') }}">
+{% endblock css %}
+
+{% block content %}
+
+{% if announcements %} <script> let announcement_exists = 1; </script> {% else %} <script> let announcement_exists = 0; </script> {% endif %} 
+{% if nom or aguinaldo %} <script> let noDocs = 0; </script> {% else %} <script> let noDocs = 1; </script> {% endif %} 
+{% if nom or aguinaldo %}
+<div class="container dvh-100">
+    <div class="nom-view-container">
+        <div class="pdf_container" id="pdf_container">
+            {% if announcements %}
+                <div class="modal-announce-container" id="modal-announce-container">
+                    <div class="announce-title font-roboto">
+                        <h3>Anuncios</h3>
+                    </div>
+                    <div class="modal-announce font-roboto" id="modal">
+                            {% if announcements|length > 1 %}
+                                <a href="javascript:void(0)" onclick="plusSlides(-1)"><div class="announce-carousel-controler"><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#404040"><path d="M560.67-224.93 304.93-480.67l255.74-255.74 62.4 62.41-193.33 193.33 193.33 193.34-62.4 62.4Z"/></svg></div></a>
+                            {% else %}
+                                <div></div>
+                            {% endif %}
+                            {% set name = "2.1.jpg" %}
+                            {% for announcement in announcements %}
+                                <div class="announce-img-container caroussel fade">
+                                    <img src="{{ url_for('static', filename='images/Avisos/' + announcement ) }}" class="announce-img" alt="Avisos de la semana">
+                                </div>
+                            {% endfor %}
+                            {% if announcements|length > 1 %}
+                                <a href="javascript:void(0)" onclick="plusSlides(1)"><div class="announce-carousel-controler"><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#404040"><path d="M506.26-480.67 312.93-674l62.4-62.41 255.74 255.74-255.74 255.74-62.4-62.4 193.33-193.34Z"/></svg></div></a>
+                            {% else %}
+                                <div></div>
+                            {% endif %}
+                    </div>
+                    <div class="announce-footer font-roboto txt-center">
+                        <i>Seleccione alguna nómina para comenzar a ver.</i>
+                    </div>
+                </div>
+            {% else %}
+                <div class="font-roboto txt-center">
+                    <i class="ni-text">Seleccione algún documento para mostrar.</i>
+                </div>
+            {% endif %}
+            <div class="pdf-body no-show" id="pdf-body">
+                <object class="pdf" title="Nomina de empleado {{current_user.id}}" id="pdf_viewer"></object>
+                <div class="font-roboto" id="pdf-footer"></div>
+            </div>
+        </div>
+        <div class="sidebar-container">
+            <div class="tables-container">
+                {% if nom %}
+                <div class="table-container mb-15">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th colspan="4">
+                                    <a onclick="openMenu('nom-table')">
+                                        <div class="table-menu">
+                                            Nóminas
+                                        </div>
+                                    </a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="nom-table-body table-menu-opened" id="nom-table">
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+                {% if aguinaldo %}
+                <div class="table-container mb-15">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th colspan="4">
+                                    <a onclick="openMenu('agu-table')">
+                                        <div class="table-menu">
+                                            Aguinaldo
+                                        </div>
+                                    </a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="fa-table-body table-menu-closed" id="agu-table">
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+            </div>
+            <div class="info-container font-roboto txt-center">
+                <div class="info-item-container">
+                    <div class="info-item">
+                        <div class="info-content">
+                            <div class="info-header mb-15">
+                                <div class="info-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px"><path d="M186.67-80q-27 0-46.84-19.83Q120-119.67 120-146.67v-600q0-27 19.83-46.83 19.84-19.83 46.84-19.83h56.66V-880h70v66.67h333.34V-880h70v66.67h56.66q27 0 46.84 19.83Q840-773.67 840-746.67v600q0 27-19.83 46.84Q800.33-80 773.33-80H186.67Zm0-66.67h586.66v-420H186.67v420Zm0-486.66h586.66v-113.34H186.67v113.34Zm0 0v-113.34 113.34ZM480-400q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>
+                                </div>
+                                <div class="info-title">
+                                    Fecha ingreso
+                                </div>
+                            </div>
+                            <div class="info-value">
+                                {{ user_extras["start_date"] }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-item-container">
+                    <div class="info-item">
+                        <div class="info-content">
+                            <div class="info-header mb-5">
+                                <div class="info-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px"><path d="M146.67-186.67v-466.66 466.66-19.5 19.5Zm0 66.67q-27 0-46.84-19.83Q80-159.67 80-186.67v-466.66q0-27 19.83-46.84Q119.67-720 146.67-720H320v-93.33q0-26.34 19.83-46.5Q359.67-880 386.67-880h186.66q27 0 46.84 20.17Q640-839.67 640-813.33V-720h173.33q27 0 46.84 19.83Q880-680.33 880-653.33v207q-15.33-11.67-31.67-20.84-16.33-9.16-35-16.83v-169.33H146.67v466.66h317q3.66 17.67 9.66 34.34 6 16.66 14.34 32.33h-341Zm240-600h186.66v-93.33H386.67V-720ZM720-44.67q-80.33 0-137.83-57.5-57.5-57.5-57.5-137.83 0-80.33 57.5-137.83 57.5-57.5 137.83-57.5 80.33 0 137.83 57.5 57.5 57.5 57.5 137.83 0 80.33-57.5 137.83-57.5 57.5-137.83 57.5ZM738-244v-120h-41.33v133.18l94.66 89.49 27.34-27.34L738-244Z"/></svg>
+                                </div>
+                                <div class="info-title">
+                                    Antiguedad
+                                </div>
+                            </div>
+                            <div class="info-value seniority">
+                                {% if user_extras["seniority_years"] %} {{ user_extras["seniority_years"] }} año(s) <br> {% endif %}
+                                {{ user_extras["seniority_months"] }} meses
+                                <br>
+                                {{ user_extras["seniority_days"] }} días
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-item-container" id="vac_days" style="display: none;">
+                    <div class="info-item">
+                        <div class="info-content">
+                            <div class="info-header mb-15">
+                                <div class="info-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px"><path d="m790.67-125.33-260-260L580-434.67l260 260-49.33 49.34Zm-562-40Q173.33-224 146.67-296 120-368 120-442.67q0-78 29-152T237.33-728q59.34-59.33 133.84-88.5t152.5-29.17q74.66 0 146.5 26.84Q742-792 800-736.67L228.67-165.33Zm4.66-100 64-64.67q-16-21.67-31.5-46t-28.5-50.67q-13-26.33-22-54-9-27.66-13.33-56-21.67 69-12.83 140 8.83 71 44.16 131.34Zm115.34-113.34 238-240q-45-35-91.17-55.5T408-701.5q-41.33-6.83-73.83-.83T284-678.67q-17.67 18-22.67 50.5t2.5 73q7.5 40.5 28.67 85.84 21.17 45.33 56.17 90.66ZM635.33-668 702-732q-61.67-38.67-133-46.67t-140.33 15.34Q456-759 483-750t53.33 21.17q26.34 12.16 51.17 27.66 24.83 15.5 47.83 33.17Z"/></svg>
+                                </div>
+                                <div class="info-title">
+                                    Saldo Vacaciones
+                                </div>
+                            </div>
+                            <div class="info-value">
+                                {{ user_extras["vacations"] }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if user_extras["fonacot"] %}
+                <div class="info-item-container" id="fonacot">
+                    <div class="info-item">
+                        <div class="info-content">
+                            <div class="info-header mb-15">
+                                <div class="info-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px"><path d="M444-200h70v-50q50-9 86-39t36-89q0-42-24-77t-96-61q-60-20-83-35t-23-41q0-26 18.5-41t53.5-15q32 0 50 15.5t26 38.5l64-26q-11-35-40.5-61T516-710v-50h-70v50q-50 11-78 44t-28 74q0 47 27.5 76t86.5 50q63 23 87.5 41t24.5 47q0 33-23.5 48.5T486-314q-33 0-58.5-20.5T390-396l-66 26q14 48 43.5 77.5T444-252v52Zm36 120q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+                                </div>
+                                <div class="info-title">
+                                    Crédito Fonacot
+                                </div>
+                            </div>
+                            <div class="info-value">
+                                {{ user_extras["fonacot"] }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="info-item-container">
+                    <div class="info-item">
+                        <div class="info-content" id="fondo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+    {% if announcements %}
+        <div class="announce-vh-container">
+            <div class="announce-container">
+                <div class="modal-announce-container" id="modal-announce-container">
+                    <div class="announce-title font-roboto">
+                        <h3>Anuncios</h3>
+                    </div>
+                    <div class="modal-announce font-roboto" id="modal">
+                            <a href="javascript:void(0)" onclick="plusSlides(-1)"><div class="announce-carousel-controler"><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#404040"><path d="M560.67-224.93 304.93-480.67l255.74-255.74 62.4 62.41-193.33 193.33 193.33 193.34-62.4 62.4Z"/></svg></div></a>
+                            {% for announcement in announcements %}
+                                <div class="announce-img-container caroussel fade">
+                                    <img src="{{ url_for('static', filename='images/Avisos/' + announcement ) }}" class="announce-img" alt="Avisos de la semana">
+                                </div>
+                            {% endfor %}
+                            <a href="javascript:void(0)" onclick="plusSlides(1)"><div class="announce-carousel-controler"><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#404040"><path d="M506.26-480.67 312.93-674l62.4-62.41 255.74 255.74-255.74 255.74-62.4-62.4 193.33-193.34Z"/></svg></div></a>
+                    </div>
+                    <div class="announce-footer font-roboto txt-center" onclick="noDocuments()">
+                        <i>No tiene documentos para mostrar.</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="vh-container font-roboto">
+            <i>No tiene documentos para mostrar.</i>
+        </div>
+    {% endif %}
+{% endif %}
+
+<script>
+    let nom_list = {{ nom|safe }}, aguinaldo_list = {{ aguinaldo|safe }}, userId = '{{ current_user.id }}', user_level = '{{ current_user.user_lvl.level_name }}', fa = '$' + {{ user_extras["fa"] }}, fa_total = '$' + {{ user_extras["fa_total"] }};
+</script>
+
+{% if announcements %}
+    <script src="{{ url_for('static', filename='scripts/caroussel.js') }}" id="caroussel_script"></script>
+{% endif %}
+<script src="{{ url_for('static', filename='scripts/modal.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/index.js') }}"></script>
+{% if not current_user.email %} <script>changeEmailModal('{{ '' }}');</script> {% endif %}
+<script src="{{ url_for('static', filename='scripts/pdf_handler.js') }}"></script>
+
+
+{% endblock %}

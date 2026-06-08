@@ -1,0 +1,26 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+.venv/
+
+# Ignore SQL Querys folder
+SQL Querys/
+**/current_nom
+website/static/images/Avisos
+
+# dotenv files (do NOT commit real ones)
+**/.env
+**/.env.*
+!**/.example     # allow .env.example to be tracked
+
+
+# VSCode settings (if you're using it)
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

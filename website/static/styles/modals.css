@@ -1,0 +1,183 @@
+/* Modal */
+
+.modal-container {
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 100dvh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+}
+
+.modal-open {
+    display: block;
+}
+
+.modal-content header {
+    margin: 2rem;
+}
+
+.modal {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background-color: var(--secondary-bg-color);
+    height: fit-content;
+    border-radius: .3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 30rem;
+}
+
+.modal-header-icon-container {
+    position: absolute;
+    top: -5rem;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-header-icon {
+    border-radius: 50%;
+    background-color: var(--bg-color);
+}
+
+.modal-header-icon svg {
+    height: 9rem;
+    width: 9rem;
+}
+
+.modal footer {
+    width: 100%;
+    font-weight: 500;
+}
+
+.modal-btn-confirm,
+.modal-btn-cancel {
+    height: 4rem;
+    width: 50%;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+}
+
+.modal a p,
+.modal button p {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* End Modal */
+
+.modal-with-icon {
+    padding: 6rem 2rem 2rem;
+}
+
+.modal-close-btn {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    height: 2.3rem;
+    width: 2.3rem;
+    border: 3px solid var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: var(--red);
+}
+
+.modal-close-btn:hover {
+    cursor: pointer;
+    background-color: var(--bg-color);
+}
+
+.modal-close-btn:hover svg {
+    fill: var( --red );
+}
+
+.modal-close-btn svg {
+    width: 2rem;
+    height: 2rem;
+    fill: #fff;
+}
+
+.modal-form-body {
+    width: 100%;
+}
+
+.modal-form-input-container {
+    width: 100%;
+}
+
+.modal-form-label {
+    text-align: left;
+    color: var(--main-font);
+    font-size: .9rem;
+    margin-bottom: .2rem;
+    margin-left: .5rem;
+    font-weight: 600;
+}
+
+.modal-input-with-icon {
+    position: relative;
+}
+
+.modal-input-with-icon>.modal-input-icon {
+    position: absolute;
+    left: 0;
+    width: 3rem;
+    height: 3rem;
+} 
+
+.modal-input-with-icon>.modal-input-icon svg {
+    fill: var(--secondary-font);
+    width: 24px;
+    height: 24px;
+}
+
+.modal-input-with-icon .modal-input {
+    height: 3rem;
+    padding: 0 1rem 0 3rem;
+    outline: none;
+    border: 2px solid var(--borders);
+    border-radius: .3rem;
+}
+
+.modal-input-with-icon:focus-within .modal-input {
+    border-color: var(--blue);
+}
+
+.modal-input-with-icon:focus-within svg {
+    fill: var(--blue);
+}
+
+
+.modal-mailbox {
+    padding: .8rem;
+}
+
+.modal input:read-only {
+    cursor: not-allowed;
+    background-color: var(--gray);
+    outline: none;
+    border-radius: .3rem;
+    border: 2px solid var(--borders);
+}
