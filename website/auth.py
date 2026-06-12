@@ -37,7 +37,9 @@ def login():
                 print("---------------------------------------------")
                 userID = request.form.get('user')
                 password = request.form.get('password')
-                user = Users.query.filter_by(id=userID, company=f'{company}').first()
+                # user = Users.query.filter_by(id=userID, company=f'{company}').first()
+                user = Users.query.filter_by(id=userID).first()
+                print(user)
                 if user:
                     if check_password_hash(user.password, password):
                         functionalities.set_user_session_time(user)

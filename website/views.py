@@ -172,10 +172,3 @@ def nom_questions():
     res_message, status = added_funcs.send_question(current_user, subject, body)
     flash(res_message, category=status)
     return redirect(url_for("views.home"))
-
-
-@views.route('/all-users')
-def all_users():
-    users = db.session.query(Users).all()
-    print(users)
-    return redirect(url_for("views.home"))
