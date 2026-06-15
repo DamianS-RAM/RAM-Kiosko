@@ -157,6 +157,10 @@ class added_funcs():
     def get_announcements():
         announcements_path = os.getcwd() + f'\\website\\static\\images\\Avisos\\'
 
+        if not os.path.exists(announcements_path):
+            # Create the folder (including intermediate directories)
+            os.makedirs(announcements_path)
+
         announcements = [ f for f in os.listdir(announcements_path) if os.path.isfile(announcements_path + f) ]
 
         return announcements
