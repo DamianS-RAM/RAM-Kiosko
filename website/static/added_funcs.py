@@ -46,6 +46,8 @@ class added_funcs():
         except Exception as e:
             with open('error_logs.txt', 'w') as f:
                 f.write(f"Error ocurred while copying the employee files: '{e}'")
+
+            return 0
     
 
     def deleteEmpDir(id=None):
