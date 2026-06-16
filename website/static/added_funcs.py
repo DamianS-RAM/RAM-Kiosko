@@ -14,33 +14,38 @@ locale.setlocale(locale.LC_ALL,'es_US')
 class added_funcs():
     
     def getFilesDir(empNo, documents, type):
-        target = os.getcwd() + f'\\website\\static\\current_nom\\{empNo}\\'
+        try:
+            target = os.getcwd() + f'\\website\\static\\current_nom\\{empNo}\\'
 
-        if not os.path.exists(target):
-            os.makedirs(target)
-        
-        files = []
-        filenames = []
-
-        dates = added_funcs.getDateRangeFromWeek(documents)
-        for document in documents:
-            path_new = glob.glob(f"{document.directory}\\{str(empNo)}\\{empNo}*{document.docNum}_1.pdf")
-
-            if path_new:
-                files.append(path_new[0])
-                filenames.append(type + dates[document.id_docInfo])
-
+            if not os.path.exists(target):
+                os.makedirs(target)
             
-        for i, file in enumerate(files):
-            shutil.copy( file, target + filenames[i] + ".pdf" )
+            files = []
+            filenames = []
 
-        """ dates = {}
+            dates = added_funcs.getDateRangeFromWeek(documents)
+            for document in documents:
+                path_new = glob.glob(f"{document.directory}\\{str(empNo)}\\{empNo}*{document.docNum}_1.pdf")
 
-        for document in documents:
-            week = document.docPeriod.split("-W")
-            dates[document.docPeriod] = (date.fromisocalendar(int(week[0]), int(week[1]), 1).strftime("%d %b"), date.fromisocalendar(int(week[0]), int(week[1]), 6).strftime(" al %d %b de %Y")) """
+                if path_new:
+                    files.append(path_new[0])
+                    filenames.append(type + dates[document.id_docInfo])
 
-        return filenames
+                
+            for i, file in enumerate(files):
+                shutil.copy( file, target + filenames[i] + ".pdf" )
+
+            """ dates = {}
+
+            for document in documents:
+                week = document.docPeriod.split("-W")
+                dates[document.docPeriod] = (date.fromisocalendar(int(week[0]), int(week[1]), 1).strftime("%d %b"), date.fromisocalendar(int(week[0]), int(week[1]), 6).strftime(" al %d %b de %Y")) """
+
+            return filenames
+        
+        except Exception as e:
+            with open('error_logs.txt', 'w') as f:
+                f.write(f"Error ocurred while copying the employee files: '{e}'")
     
 
     def deleteEmpDir(id=None):
